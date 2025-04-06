@@ -23,31 +23,56 @@ mkdir data
 # 4. AppDbContext
 
 using Microsoft.EntityFrameworkCore;
-using MyNewApp.Models;
+using Manajemen_Pro.Models; 
 
-
-namespace MyNewApp.Data
+namespace Manajemen_Pro.Data
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         // Definisikan tabel dalam database
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Produk> Produk { get; set; }
+        public DbSet<Transaksi> Transaksi { get; set; }
+
+
     }
 }
 
 # 5. Data/Model
 
-namespace MyNewApp.Models
+namespace Manajemen_Pro.Models
 {
-    public class Product
+    public class Produk
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        public string? Nama { get; set; }
+        public int? Harga { get; set; }
+
+        // Relasi: satu produk bisa punya banyak transaksi
+        public List<Transaksi>? Transaksis { get; set; }
     }
 }
+
+using System;
+
+namespace Manajemen_Pro.Models
+{
+    public class Transaksi
+    {
+        public int Id { get; set; }
+        public DateTime Tanggal { get; set; }
+        public string? NamaPelanggan { get; set; }
+        public int? Jumlah { get; set; }
+
+        public decimal? TotalHarga { get; set; }
+
+        // Relasi ke Produk
+        public int ProdukId { get; set; }
+        public Produk? Produk { get; set; }
+    }
+}
+
 
 # 6. appsettings.json
 
