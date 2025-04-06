@@ -2,21 +2,28 @@
 
 Aplikasi manajemen produk dan transaksi menggunakan ASP.NET Core MVC + Entity Framework Core.
 
-## 🛠 Fitur
+## 🚀 Setup Awal
 
-- CRUD Produk (Create, Read, Update, Delete)
-- CRUD Transaksi dengan relasi ke Produk
-- Validasi input
-- Tampilan form dan tabel yang responsif menggunakan Bootstrap
-- Relasi database antar entitas Produk dan Transaksi
+Berikut adalah langkah-langkah untuk memulai proyek ini dari awal:
 
-## 🧱 Teknologi
+```bash
+# 1. Membuat project baru
+dotnet new mvc -n Manajemen_Pro --framework net9.0
+cd Manajemen_Pro
 
-- ASP.NET Core MVC
-- Entity Framework Core
-- Razor Pages (.cshtml)
-- SQL Server
-- Bootstrap (untuk styling)
+# 2. Install Entity Framework Core dan provider MySQL (Pomelo)
+dotnet add package Microsoft.EntityFrameworkCore --version 8.0.5
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.5
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.5
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 8.0.0
 
-## 📂 Struktur Folder
+# 3. Membuat folder untuk menyimpan file database atau context
+mkdir data
 
+# 4. Membuat dan Menjalankan Migrasi
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+# 5. Menjalankan Aplikasi
+ dotnet run 
+ dotnet watch run
