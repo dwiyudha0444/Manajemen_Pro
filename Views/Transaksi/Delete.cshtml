@@ -1,0 +1,35 @@
+@model Manajemen_Pro.Models.Transaksi
+
+@{
+    ViewData["Title"] = "Konfirmasi Hapus Transaksi";
+}
+
+<h2 class="text-danger">Konfirmasi Hapus</h2>
+
+<p>Apakah Anda yakin ingin menghapus transaksi berikut?</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Produk</th>
+        <td>@Model.Produk?.Nama</td>
+    </tr>
+    <tr>
+        <th>Jumlah</th>
+        <td>@Model.Jumlah</td>
+    </tr>
+    <tr>
+        <th>Total Harga</th>
+        <td>@Model.TotalHarga</td>
+    </tr>
+    <tr>
+        <th>Tanggal</th>
+        <td>@Model.Tanggal.ToString("dd MMM yyyy HH:mm")</td>
+    </tr>
+</table>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    
+    <button type="submit" class="btn btn-danger">Hapus</button>
+    <a asp-action="Index" class="btn btn-secondary">Batal</a>
+</form>

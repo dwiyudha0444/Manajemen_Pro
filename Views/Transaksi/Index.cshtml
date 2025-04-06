@@ -1,0 +1,40 @@
+@model IEnumerable<Manajemen_Pro.Models.Transaksi>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Daftar Transaksi";
+}
+
+<h2>Daftar Transaksi</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nama Pelanggan</th>
+            <th>Jumlah</th>
+            <th>Total Harga</th>
+            <th>Tanggal Transaksi</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.NamaPelanggan</td>
+                <td>@item.Jumlah</td>
+                <td>@item.TotalHarga</td>
+                <td>@item.Tanggal.ToString("dd MMM yyyy HH:mm")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Detail" asp-route-id="@item.Id" class="btn btn-info">Detail</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Hapus</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Tambah Transaksi</a>

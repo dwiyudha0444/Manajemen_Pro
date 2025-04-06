@@ -9,13 +9,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// Tambahkan MVC
+// Tambahkan layanan MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,0 +1,48 @@
+@model Manajemen_Pro.Models.Transaksi
+
+@{
+    ViewData["Title"] = "Tambah Transaksi";
+}
+
+<h2>Tambah Transaksi</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="NamaPelanggan"></label>
+        <input asp-for="NamaPelanggan" class="form-control" placeholder="Masukkan nama pelanggan" />
+        <span asp-validation-for="NamaPelanggan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProdukId">Produk</label>
+        <select asp-for="ProdukId" asp-items="ViewBag.ProdukList" class="form-control" required>
+            <option value="">-- Pilih Produk --</option>
+        </select>
+        <span asp-validation-for="ProdukId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Jumlah"></label>
+        <input asp-for="Jumlah" type="number" class="form-control" required />
+        <span asp-validation-for="Jumlah" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TotalHarga"></label>
+        <input asp-for="TotalHarga" type="number" step="0.01" class="form-control" required />
+        <span asp-validation-for="TotalHarga" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tanggal"></label>
+        <input asp-for="Tanggal" type="datetime-local" class="form-control" required />
+        <span asp-validation-for="Tanggal" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a asp-action="Index" class="btn btn-secondary">Kembali</a>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
