@@ -9,5 +9,8 @@ namespace Manajemen_Pro.Data
 
         // Definisikan tabel dalam database
         public DbSet<Produk> Produk { get; set; }
+        public DbSet<Transaksi> Transaksi { get; set; }
+
+
     }
 }
