@@ -22,32 +22,32 @@ mkdir data
 
 # 4. AppDbContext
 
-# using Microsoft.EntityFrameworkCore;
-# using MyNewApp.Models;
+using Microsoft.EntityFrameworkCore;
+using MyNewApp.Models;
 
 
-# namespace MyNewApp.Data
-# {
-#     public class AppDbContext : DbContext
-#     {
-#         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+namespace MyNewApp.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-#         // Definisikan tabel dalam database
-#         public DbSet<Product> Products { get; set; }
-#     }
-# }
+        // Definisikan tabel dalam database
+        public DbSet<Product> Products { get; set; }
+    }
+}
 
 # 5. Data/Model
 
-# namespace MyNewApp.Models
-# {
-#     public class Product
-#     {
-#         public int Id { get; set; }
-#         public string Name { get; set; }
-#         public decimal Price { get; set; }
-#     }
-# }
+namespace MyNewApp.Models
+{
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+    }
+}
 
 # 6. appsettings.json
 
