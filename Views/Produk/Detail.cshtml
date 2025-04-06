@@ -1,0 +1,16 @@
+@model Manajemen_Pro.Models.Produk
+
+<h2>Detail Produk</h2>
+
+<table class="table">
+    <tr>
+        <th>Nama</th>
+        <td>@Model.Nama</td>
+    </tr>
+    <tr>
+        <th>Harga</th>
+        <td>@Model.Harga</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Kembali</a>

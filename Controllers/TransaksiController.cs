@@ -52,22 +52,22 @@ namespace Manajemen_Produk.Controllers
             return View(transaksi);
         }
 
-    // Konfirmasi Hapus Transaksi
+        // Konfirmasi Hapus Transaksi
         [HttpGet]
-[Route("hapus/{id}")]
-public async Task<IActionResult> Delete(int id)
-{
-    var transaksi = await _context.Transaksi
-        .Include(t => t.Produk) // => ini yang penting
-        .FirstOrDefaultAsync(t => t.Id == id);
+        [Route("hapus/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var transaksi = await _context.Transaksi
+                .Include(t => t.Produk) // => ini yang penting
+                .FirstOrDefaultAsync(t => t.Id == id);
 
-    if (transaksi == null)
-    {
-        return NotFound();
-    }
+            if (transaksi == null)
+            {
+                return NotFound();
+            }
 
-    return View(transaksi); // Kirim transaksi lengkap dengan relasi Produk
-}
+            return View(transaksi); // Kirim transaksi lengkap dengan relasi Produk
+        }
 
 
         // Proses Hapus Transaksi
@@ -84,6 +84,86 @@ public async Task<IActionResult> Delete(int id)
             }
             return RedirectToAction("Index"); // Kembali ke daftar transaksi
         }
+
+        // GET: Transaksi/Edit/5
+        [HttpGet]
+        [Route("Transaksi/Edit/{id}")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var transaksi = await _context.Transaksi.FindAsync(id);
+            if (transaksi == null)
+            {
+                return NotFound();
+            }
+
+            // Kirim daftar produk ke dropdown
+            ViewBag.ProdukList = new SelectList(_context.Produk, "Id", "Nama", transaksi.ProdukId);
+            return View(transaksi);
+        }
+
+        // POST: Transaksi/Edit/5
+        [HttpPost]
+        [Route("Transaksi/Edit/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NamaPelanggan,ProdukId,Jumlah,TotalHarga,Tanggal")] Transaksi transaksi)
+        {
+            if (id != transaksi.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(transaksi);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TransaksiExists(transaksi.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            // Jika gagal, isi ulang produk
+            ViewBag.ProdukList = new SelectList(_context.Produk, "Id", "Nama", transaksi.ProdukId);
+            return View(transaksi);
+        }
+
+        private bool TransaksiExists(int id)
+        {
+            return _context.Transaksi.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        [Route("detail/{id}")]
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var transaksi = await _context.Transaksi
+                .Include(t => t.Produk) // ← Menyertakan relasi ke Produk
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (transaksi == null)
+            {
+                return NotFound();
+            }
+
+            return View(transaksi); // Mengirim ke View
+        }
+
 
     }
 }

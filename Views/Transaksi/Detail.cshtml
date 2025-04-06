@@ -1,0 +1,32 @@
+@model Manajemen_Pro.Models.Transaksi
+
+@{
+    ViewData["Title"] = "Detail Transaksi";
+}
+
+<h2 class="mb-4">Detail Transaksi</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nama Pelanggan</th>
+        <td>@Model.NamaPelanggan</td>
+    </tr>
+    <tr>
+        <th>Nama Produk</th>
+        <td>@Model.Produk?.Nama</td>
+    </tr>
+    <tr>
+        <th>Jumlah</th>
+        <td>@Model.Jumlah</td>
+    </tr>
+    <tr>
+        <th>Total Harga</th>
+        <td>@Model.TotalHarga</td>
+    </tr>
+    <tr>
+        <th>Tanggal Transaksi</th>
+        <td>@Model.Tanggal.ToString("dd MMMM yyyy HH:mm")</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Kembali</a>
